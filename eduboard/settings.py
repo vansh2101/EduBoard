@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'eduboard.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'eduboard',
-        'USER': 'postgres',
-        'PASSWORD': 'vansh2101',
-        'HOST': 'localhost'
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': ''
     }
 }
 
