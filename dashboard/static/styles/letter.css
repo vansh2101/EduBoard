@@ -1,0 +1,118 @@
+.split{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2%;
+}
+
+.left, .right{
+    background-color: white;
+    border-radius: 10px;
+    height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.left{
+    width: 35%;
+}
+.left h1{
+    font-size: 2.3vw;
+    margin-left: 5%;
+    position: relative;
+}
+
+.add{
+    position: absolute;
+    right: 4%;
+    top: 4%;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+    border: none;
+    outline: none;
+    width: 9%;
+    border-radius: 10px;
+    font-size: 1.6vw;
+    color: white;
+    cursor: pointer;
+}
+
+.left ul{
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin-top: -3%;
+}
+.left li{
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 8px 0;
+}
+.left li:hover{
+    background-color: #f2f2f2;
+}
+
+.left table{
+    width: 95%;
+    margin: auto;
+}
+
+.icon-col{
+    width: 15%;
+    text-align: center;
+}
+.main-col{
+    width: 70%;
+    padding-left: 10px;
+}
+
+.left ul i{
+    font-size: 3vw;
+    margin-top: 10%;
+    color: #666a6d;
+}
+.left .fa-exclamation-circle{
+    margin-top: 0;
+}
+.left h3{
+    height: 10px;
+    font-size: 1.5vw;
+    margin-top: 0;
+}
+.left span{
+    opacity: 0.8;
+    font-size: 1vw;
+}
+
+
+.right{
+    width: 52%;
+    height: 88.5vh;
+    padding: 5px 20px;
+}
+.right h1{
+    font-weight: 550;
+    font-size: 2.4vw;
+    height: 35px;
+}
+.right span{
+    opacity: 0.85;
+    font-size: 1.2vw;
+}
+.right h2{
+    font-weight: 550;
+    height: 20px;
+}
+.right p{
+    font-size: 1.18vw;
+    opacity: 0.85;
+}
+.right button{
+    border: none;
+    outline: none;
+    width: 30%;
+    border-radius: 10px;
+    padding: 5px 0;
+    font-size: 1.3vw;
+    color: white;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+    cursor: pointer;
+}

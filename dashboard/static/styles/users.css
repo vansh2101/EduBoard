@@ -1,0 +1,89 @@
+/* Common Classes */
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+.container{
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    width: 91%;
+    height: 89vh;
+    padding: 1.5vh 2vw;
+    margin: auto;
+    margin-top: 1%;
+    overflow-y: auto;
+}
+.container h1{
+    font-size: 3vw;
+    position: relative;
+    margin-top: 0.5%;
+}
+
+.add{
+    position: absolute;
+    top: 18%;
+    right: 2%;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+    padding: 7px 10px;
+    width: 15%;
+    color: white;
+    font-size: 1.4vw;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.add:hover{
+    transform: translateY(-5px);
+    box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.container-inner{
+    width: 90%;
+    margin: auto;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+input{
+    width: 55%;
+    border: 2px solid rgba(0,0,0,0.15);
+    outline: none;
+    font-size: 1.2vw;
+    color: rgba(0,0,0,0.8);
+    transition: 0.2s;
+    background-image: url(../images/search.gif);
+    background-position: left;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    padding: 7px 5px;
+    padding-left: 44px;
+}
+input:focus{
+    border: 2px solid #185ed0;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.25);
+}
+
+table{
+    width: 100%;
+    margin-top: 2%;
+    text-align: center;
+    max-height: 62vh;
+    border-collapse: collapse;
+}
+tr:nth-child(odd){
+    background-color: #f2f2f2;
+}
+th{
+    font-size: 1.35vw;
+    color: rgba(0,0,0,0.7);
+    border-bottom: 1.5px solid gray;
+    background-color: lightgray;
+}
+td{
+    font-size: 1.2vw;
+    padding: 5px 0;
+}

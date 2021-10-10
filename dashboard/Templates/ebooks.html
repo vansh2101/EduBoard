@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Ebooks {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/ebooks.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<center>
+<div class="book-container">
+    <h1>
+        <i class="fa fa-book" aria-hidden="true"></i> E-Books
+        {% if type == 'teacher' %}
+            <a href="/dashboard/add/ebook"><button class="add">EBook <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        {% endif %}
+    </h1>
+
+    <div class="container">
+        {% for book in books %}
+            <div class="book">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <h3 class="topic">{{book.name}}</h3>
+                {% if type == 'teacher' %}
+                    <span>Class {{book.grade}}</span>
+                    <br>
+                {% endif %}
+                <span>{{book.subject}}</span>
+                <br>
+                <a href="{{book.file.url}}" target="_blank"><button>Read Book</button></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</center>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('books')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+</script>
+{% endblock %}

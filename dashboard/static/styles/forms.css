@@ -1,0 +1,70 @@
+.form-container{
+    width: 92%;
+    background-color: white;
+    border-radius: 10px;
+    height: 90vh;
+    margin-top: 1.5%;
+    margin-left: 1.5%;
+    padding: 1vh 1.5vw;
+    overflow-y: auto;
+}
+
+h1{
+    font-size: 2.3vw;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+label{
+    font-size: 1.5vw;
+    margin: 1% 0;
+}
+
+input, select{
+    width: 80%;
+    border: 2px solid rgba(0,0,0,0.15);
+    outline: none;
+    font-size: 1.2vw;
+    color: rgba(0,0,0,0.8);
+    padding: 5px 10px;
+    margin-bottom: 2%;
+    transition: 0.2s;
+}
+select{
+    width: 84.5%;
+}
+input:focus, select:focus{
+    border: 2px solid #185ed0;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.25);
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type='number']{
+    appearance: textfield;
+}
+
+input[type='submit']{
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+    font-size: 1.8vw;
+    width: 84.5%;
+    border: none;
+    outline: none;
+    color: white;
+    margin-top: 5%;
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.3s;
+}
+input[type='submit']:hover{
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.35);
+    opacity: 1;
+}

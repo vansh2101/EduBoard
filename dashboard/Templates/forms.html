@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Add {{title}} {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/forms.css' %}">
+{% endblock %}
+
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="form-container">
+    <h1>Add {{title}}</h1>
+
+    <form method="POST" action="/dashboard/add/{{title.lower}}/" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

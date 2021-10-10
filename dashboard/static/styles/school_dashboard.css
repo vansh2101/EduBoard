@@ -1,0 +1,178 @@
+*{
+    user-select: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+/* common */
+.goto-btn{
+    position: absolute;
+    top: 6%;
+    right: 3%;
+    color: black;
+    font-size: 2.5vw;
+}
+
+
+/* Main content */
+.layer{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 0;
+    margin-top: 2%;
+}
+
+
+/* First Layer */
+/* Class Box */
+.workshop{
+    background-color: white;
+    border-radius: 15px;
+    width: 60%;
+    padding: 0 2vw;
+    padding-bottom: 3vh;
+    height: 48vh;
+    position: relative;
+}
+
+.workshop-inner{
+    display: flex;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.workshop-box{
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    width: 27%;
+    padding: 0 10px;
+    padding-bottom: 2vh;
+    margin: 0 1%;
+    margin-right: 2.5%;
+}
+.workshop-box h3{
+    height: 20px;
+    font-size: 1.5vw;
+}
+.workshop-box button{
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 0;
+    font-size: 1.3vw;
+    color: white;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+}
+
+.details{
+    font-size: 1.2vw;
+}
+
+/* Profile Box */
+.profile{
+    width: 25%;
+    padding: 40px 1.3vw;
+    background-image: linear-gradient(to bottom, #4b189b, #185ed0);
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+.profile i{
+    font-size: 7vw;
+}
+.profile h1{
+    height: 25px;
+    font-size: 2.2vw;
+}
+.profile h3{
+    height: 10px;
+    opacity: 0.9;
+    font-weight: lighter;
+    font-size: 1.4vw;
+}
+
+
+/* Second Layer */
+.users{
+    display: flex;
+    width: 95%;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    height: 75vh;
+}
+
+.users hr{
+    height: 90%;
+    margin-top: 2.5%;
+    opacity: 0.3;
+}
+
+.users h1{
+    font-size: 2.3vw;
+    margin-left: 2%;
+}
+
+.students, .teachers{
+    position: absolute;
+    top: 0;
+    width: 45%;
+    padding: 10px 25px;
+    height: 95%;
+    overflow: hidden;
+}
+
+.students{
+    left: 0;
+}
+
+.students ul, .teachers ul{
+    list-style-type: none;
+    width: 95%;
+    padding: 0;
+    margin-top: 3%;
+}
+.students li, .teachers li{
+    display: flex;
+    width: 100%;
+    padding: 5px 10px;
+}
+.students hr, .teachers hr{
+    width: 35%;
+    opacity: 1;
+    margin-left: 38%;
+}
+.students i, .teachers i{
+    font-size: 4vw;
+    color: #666a6d;
+    margin-top: 2%;
+}
+.students div, .teachers div{
+    margin-left: 5%;
+}
+.students span, .teachers span{
+    font-size: 1.3vw;
+    font-weight: bolder;
+    opacity: 0.8;
+    line-height: 5px;
+}
+
+
+.teachers{
+    right: 0;
+}
+
+
+.users .fa-chevron-circle-right{
+    color: black;
+    font-size: 2.5vw;
+}

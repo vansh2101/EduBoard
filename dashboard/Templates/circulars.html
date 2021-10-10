@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Circulars {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/letter.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="split">
+    <div class="left">
+        {% if type == 'school' %}
+        <h1>
+            Circulars
+            <a href="/dashboard/add/circular"><button class="add"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        </h1>
+        {% else %}
+        <h1 style="text-align: center; margin-left: 0;">Circulars</h1>
+        {% endif %}
+
+        <ul>
+            {% for circular in circulars %}
+            <li id="{{circular.id}}" onclick="show_details(this.id)">
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        </td>
+                        <td class="main-col">
+                            <h3 id="{{circular.id}}-topic" class="topic">{{circular.topic}}</h3>
+                            <span><b>Date:</b></span> <span id="{{circular.id}}-date">{{circular.date}}</span>
+
+                            {% if type == 'school' %}
+                            <br>
+                            <span><b>For:</b></span> <span id="{{circular.id}}-for">{{circular.circular_for}}</span>
+                            {% endif %}
+
+                            <input id="{{circular.id}}-description" style="display: none;" type="text" value="{{circular.description}}" disabled='true'>
+                        </td>
+                        <td class="icon-col">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="right">
+        <div id="main-content" style="display: none;">
+            <h1 id="topic"></h1>
+            <span><b>Date: </b></span><span id="date"></span>
+
+            {% if type == 'school' %}
+            <br>
+            <span><b>For: </b></span><span id="for"></span>
+            {% endif %}
+
+            <br><br>
+            <p id="description"></p>
+        </div>
+        <center>
+            <h1 id="before-text" style="margin-top: 40%; color: gray; opacity: 0.5; user-select: none;">Click on a circular to view</h1>
+        </center>
+    </div>
+</div>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('circular')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+
+    right_tab = document.getElementById('main-content')
+    main_topic = document.getElementById('topic')
+    main_deadline = document.getElementById('date')
+    main_desc = document.getElementById('description')
+    circular_for = document.getElementById('for')
+
+    function show_details(id){
+        document.getElementById('before-text').style.display = 'none'
+        right_tab.style.display = 'block'
+        main_topic.innerHTML = document.getElementById(id+'-topic').innerHTML
+        main_deadline.innerHTML = document.getElementById(id+'-date').innerHTML
+        main_desc.innerHTML = document.getElementById(id+'-description').value
+        circular_for.innerHTML = document.getElementById(id+'-for').innerHTML
+    }
+
+    if(localStorage.getItem('circular') !== ''){
+        show_details(localStorage.getItem('circular'))
+    }
+</script>
+{% endblock %}

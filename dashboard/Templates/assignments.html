@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Assignments {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/letter.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="split">
+    <div class="left">
+        {% if type == 'teacher' %}
+        <h1>
+            Assignments
+            <a href="/dashboard/add/assignments"><button class="add"><i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        </h1>
+        {% else %}
+        <h1 style="text-align: center; margin-left: 0;">Assignments</h1>
+        {% endif %}
+
+        <ul>
+            {% for assign in assignments %}
+            <li onclick="show_details(this.id)" id="{{assign.id}}">
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                        </td>
+                        <td class="main-col">
+                            <h3 id="{{assign.id}}-topic" class="topic">{{assign.topic}}</h3>
+                            <span><b>Subject:</b></span> <span id="{{assign.id}}-subject">{{assign.subject}}</span>
+                            <br>
+                            <span><b>Deadline:</b></span> <span id="{{assign.id}}-deadline">{{assign.deadline}}</span>
+                            <input id="{{assign.id}}-description" style="display: none;" type="text" value="{{assign.description}}" disabled='true'>
+                        </td>
+                        <td class="icon-col">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="right">
+        <div id="main-content" style="display: none;">
+            <h1 id="topic"></h1>
+            <span><b>Subject: </b></span><span id="subject"></span>
+            <br>
+            <span><b>Deadline: </b></span><span id="deadline"></span>
+
+            <br><br>
+            <h2>Description:-</h2>
+            <p id="description"></p>
+
+            <br>
+
+            {% if type == 'student' %}
+                <a href=""><button>Submit</button></a>
+            {% else %}
+                <a href=""><button>View Submissions</button></a>
+            {% endif %}
+        </div>
+        <center>
+        <h1 id="before-text" style="margin-top: 40%; color: gray; opacity: 0.5; user-select: none;">Click on an assignment to view</h1>
+        </center>
+    </div>
+</div>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('assignments')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+
+
+    right_tab = document.getElementById('main-content')
+    main_topic = document.getElementById('topic')
+    main_subject = document.getElementById('subject')
+    main_deadline = document.getElementById('deadline')
+    main_desc = document.getElementById('description')
+
+    function show_details(id){
+        document.getElementById('before-text').style.display = 'none'
+        right_tab.style.display = 'block'
+        main_topic.innerHTML = document.getElementById(id+'-topic').innerHTML
+        main_subject.innerHTML = document.getElementById(id+'-subject').innerHTML
+        main_deadline.innerHTML = document.getElementById(id+'-deadline').innerHTML
+        main_desc.innerHTML = document.getElementById(id+'-description').value
+    }
+
+    if (localStorage.getItem('assignment') !== ''){
+        show_details(localStorage.getItem('assignment'))
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f2f6f9;
+    overflow: hidden;
+}
+
+
+/* Sidebar */
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16.5vw;
+    padding: 15vh 0;
+    max-height: 100vh;
+}
+
+.sidebar h3{
+    position: absolute;
+    top: 0;
+    left: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    font-size: 1.7vw;
+    background-image: linear-gradient(to bottom, #4b189b, #185ed0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.sidebar img{
+    width: 22%;
+}
+
+.sidebar ul{
+    list-style-type: none;
+    padding: 0 15px;
+    padding-right: 0px;
+    max-width: 100%;
+    min-height: 77vh;
+    position: relative;
+}
+
+.sidebar a{
+    color: #666a6d;
+    text-decoration: none;
+    font-size: 1.2vw;
+}
+.sidebar li{
+    max-width: 100%;
+    padding: 7px 32px;
+    padding-right: 20px;
+    max-height: 5vh;
+    border-radius: 11px;
+    margin: 4% 0;
+    /*background-image: linear-gradient(to bottom right, #4b189b, #185ed0);*/
+    transition: 0.2s;
+}
+.sidebar li:hover{
+    background-color: rgba(24, 94, 208, 0.1);
+}
+.sidebar i{
+    margin-right: 5%;
+    width: 17px;
+}
+#logout{
+    position: absolute;
+    bottom: -3%;
+    width: 71%;
+}
+
+.open, .close{
+    display: none;
+    z-index: 100;
+    position: absolute;
+    top: 2%;
+    left: 0.7%;
+    font-size: 27px;
+    background-color: transparent;
+}
+
+
+/* main content */
+main{
+    margin-left: 16.7vw;
+    overflow-y: auto;
+    height: 100vh;
+    padding-top: 2vh;
+}
+
+
+
+/* scrollbar */
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-track{
+    background-color: inherit;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #b3b3b3;
+}
+
+
+
+@media only screen and (max-width:1100px){
+    .sidebar ul{
+        padding-left: 10px;
+    }
+    .sidebar li{
+        padding: 7px 19px;
+    }
+    .sidebar i{
+        margin-right: 1%;
+    }
+}
+
+@media only screen and (max-width:800px){
+    .sidebar{
+        width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .sidebar ul{
+        visibility: hidden;
+        padding-right: 10px;
+    }
+
+    .sidebar h3{
+        font-size: 20px;
+        left: 8%;
+        justify-content: center;
+    }
+    .sidebar img{
+        width: 15%;
+        margin-right: 2%;
+    }
+
+    .sidebar a{
+        font-size: 15px;
+    }
+    .sidebar li{
+        padding: 9px 32px;
+    }
+
+    main{
+        margin-left: 3vw;
+    }
+
+    .open{
+        display: block;
+    }
+}

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+    <ul class="nav">
+        <li id="logo" class="blue"><img src="{% static 'images/logo.png' %}"><h3>EduBoard</h3></li>
+        <li><a href='#about' style="margin-right: 17%;">About Us</a></li>
+        <li><a href='/auth/login/'><button>Login</button></a></li>
+    </ul>
+
+    <div class="intro">
+        <div class="intro-left">
+            <h1 class="blue">Schooling Made Easy</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            <br>
+            <a href='/auth/register/'><button>Get Started</button></a> <a href="#about">Know More <i class="fa fa-arrow-right" aria-hidden="true"></i></a> 
+        </div>
+
+        <div class="intro-right">
+            <img src="{% static 'images/home.svg' %}">
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <h1>Testimonials</h1>
+
+        <div class="box-container">
+            <div class="box">
+                <p>"This is a great tool for both schools and students. It organizes classes and assignments and makes it easier for teachers and students to work effectively"</p>
+                <span>-DPS Dwarka</span>
+            </div>
+
+            <div class="box">
+                <p>"This is a great tool for both schools and students. It organizes classes and assignments and makes it easier for teachers and students to work effectively"</p>
+                <span>-DPS Sushant Lok</span>
+            </div>
+
+            <div class="box">
+                <p>"This is a great tool for both schools and students. It organizes classes and assignments and makes it easier for teachers and students to work effectively"</p>
+                <span>-DPS Vasant Kunj</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="about" id="about">
+        <div class="mockup">
+            <img src="{% static 'images/mockup.png' %}">
+        </div>
+
+        <div class="text">
+            <h1>About the App</h1>
+
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="split">
+            <h1 id="logo" class="blue"><img src="{% static 'images/logo.png' %}"><span>EduBoard</span></h1>
+
+            <div class="icons">
+                <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="split">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/auth/login/">Login</a></li>
+                <li><a href="/auth/register/">Register</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </div>
+
+        <div class="split" id="split-right">
+            <h3><i class="fa fa-envelope" aria-hidden="true"></i> Need Some Help?</h3>
+            <h5>Our team will shortly get back to you</h5>
+
+            <input type="email" placeholder="Enter Your Email">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+
+</body>
+</html>

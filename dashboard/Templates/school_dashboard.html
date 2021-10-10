@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+<!--Title of the page-->
+{% block title %} Dashboard {% endblock %}
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/school_dashboard.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="layer">
+    <div class="workshop">
+        <h1>Online Classes</h1>
+
+        <a href="/dashboard/classes/" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+        <div class="workshop-inner">
+            {% if classes|length == 0 %}
+                <h1 style="margin: auto; opacity: 0.3; margin-top: 7%;">No Classes Scheduled</h1>
+            {% endif %}
+            {% for class in classes %}
+                <div class="workshop-box">
+                    <h3>{{class.subject}}</h3>
+                    <span class="details">{{class.topic}}</span>
+                    <br>
+                    <span class="details">{{class.start}}</span>
+                    <br>
+                    <span class="details">{{class.date}}</span>
+                    <br><br>
+
+                    {% if class.date == time.date and class.start <= time.time and class.end >= time.time %}
+                        <a href="{{class.url}}" target="_blank"> <button>Join <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button> </a>
+
+                    {% elif class.date < time.date %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Workshop Ended</button> </a>
+
+                    {% elif class.date <= time.date and class.end < time.time %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Workshop Ended</button> </a>
+
+                    {% else %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Not yet started</button> </a>
+
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="profile">
+        <i class="fa fa-university" aria-hidden="true"></i>
+        <h1>{{user.name}}</h1>
+        <h3>{{user.email}}</h3>
+        <h3>{{user.phone_no}}</h3>
+    </div>
+</div>
+
+
+<div class="layer">
+    <div class="users">
+        <div class="students">
+            <h1>Students</h1>
+
+            <a href="" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+            <ul>
+                {% for student in students %}
+                <li>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    <div>
+                        <span>{{student.name}}</span>
+                        <br>
+                        <span>{{student.grade}}-{{student.section}}</span>
+                        <br>
+                        <span>{{student.adm_no}}</span>
+                    </div>
+                </li>
+                <hr>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <hr>
+
+        <div class="teachers">
+            <h1>Teachers</h1>
+
+            <a href="" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+            <ul>
+                {% for teacher in teachers %}
+                <li>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <div>
+                        <span>{{teacher.name}}</span>
+                        <br>
+                        <span>{{teacher.email}}</span>
+                        <br>
+                        <span>{{teacher.subject}}</span>
+                    </div>
+                </li>
+                <hr>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<br>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('home')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+</script>
+{% endblock %}

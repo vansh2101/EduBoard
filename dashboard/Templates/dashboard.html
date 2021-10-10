@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Dashboard {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/dashboard.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="layer">
+    <div class="class">
+        <h1>Online Classes</h1>
+
+        <a href="/dashboard/classes/" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+        <div class="class-inner">
+            {% if classes|length == 0 %}
+                <h1 style="margin: auto; opacity: 0.3; margin-top: 7%;">No Classes Scheduled</h1>
+            {% endif %}
+            {% for class in classes %}
+                <div class="class-box">
+                    <h3>{{class.subject}}</h3>
+                    <span class="details">{{class.topic | truncatechars:13}}</span>
+                    <br>
+                    <span class="details">{{class.start}}</span>
+                    <br>
+                    <span class="details">{{class.date}}</span>
+                    <br><br>
+                    {% if class.date == time.date and class.start <= time.time and class.end >= time.time %}
+                        <a href="{{class.url}}" target="_blank"> <button>Join <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button> </a>
+                    {% elif class.date < time.date %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Class Ended</button> </a>
+                    {% elif class.date <= time.date and class.end < time.time %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Class Ended</button> </a>
+                    {% else %}
+                        <a href=""> <button disabled='true' style="opacity: 0.7;">Not yet started</button> </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="profile">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        <h2>{{user.name}}</h2>
+        <h4>{{user.email | truncatechars:26}}</h4>
+        {% if type == 'student' %}
+            <h4>{{user.grade}}-{{user.section}}</h4>
+            <h4>{{user.adm_no}}</h4>
+        {% else %}
+            <h4>{{user.phone_no}}</h4>
+            <h4>{{user.subject}}</h4>
+        {% endif %}
+        <h4>{{user.school.name}}</h4>
+    </div>
+</div>
+
+<div class="layer" id="wrap">
+    <div class="assignments flex-box">
+        <h1>Assignments</h1>
+
+        <a href="/dashboard/assignments/" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+        <ul>
+            {% for assign in assignment %}
+            <li>
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <h3>{{assign.topic}}</h3>
+                            <span><b>Subject:</b></span> <span>{{assign.subject}}</span>
+                            <br>
+                            <span><b>Deadline:</b></span> <span>{{assign.deadline}}</span>
+                        </td>
+                        <td>
+                            <a href="/dashboard/assignments/">
+                                <i class="fa fa-angle-right" aria-hidden="true" id="{{assign.id}}" onclick="save_assignment(this.id)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+            <center>
+                <hr>
+            </center>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="ebook flex-box">
+        <h1>E-Books</h1>
+
+        <a href="/dashboard/ebooks/" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+        <ul>
+            {% for book in books %}
+            <li>
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <h3>{{book.name}}</h3>
+                            <span><b>Subject:</b></span> <span>{{book.subject}}</span>
+                        </td>
+                        <td>
+                            <a href="{{book.file.url}}" target="_blank">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+            <center>
+                <hr>
+            </center>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="circular flex-box">
+        <h1>Circulars</h1>
+
+        <a href="/dashboard/circulars/" class="goto-btn"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>
+
+        <ul>
+            {% for circulars in circular %}
+            <li>
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <h3>{{circulars.topic}}</h3>
+                            <span><b>Date:</b></span> <span>{{circulars.date}}</span>
+                        </td>
+                        <td>
+                            <a href="/dashboard/circulars/">
+                                <i class="fa fa-angle-right" aria-hidden="true" id="{{circulars.id}}" onclick="save_circular(this.id)"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+
+            <center>
+                <hr>
+            </center>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<br>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('home')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+
+    function save_circular(id){
+        localStorage.setItem('circular', id)
+    }
+
+    function save_assignment(id){
+        localStorage.setItem('assignment', id)
+    }
+</script>
+{% endblock %}

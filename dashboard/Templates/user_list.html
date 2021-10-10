@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} {{page.capitalize}} {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/users.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<div class="container">
+    {% if page == 'students' %}
+        <h1>
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Students
+            <a href="/dashboard/add/student"><button class="add">Student <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        </h1>
+    {% else %}
+        <h1>
+            <i class="fa fa-users" aria-hidden="true"></i> Teachers
+            <a href="/dashboard/add/teacher"><button class="add">Teacher <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        </h1>
+    {% endif %}
+
+
+    <div class="container-inner">
+        <input type="search" placeholder="Type here to search..." id="search-input">
+        <table>
+            {% if page == 'students' %}
+            <tr>
+                <th width='5%'>S. No.</th>
+                <th width='11%'>Admission No.</th>
+                <th width='11%'>Name</th>
+                <th width='5%'>Class</th>
+                <th width='15%'>Email</th>
+                <th width='6%'>Phone No.</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{forloop.counter}}.</td>
+                <td>{{user.adm_no}}</td>
+                <td class="name">{{user.name}}</td>
+                <td>{{user.grade}}-{{user.section}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone_no}}</td>
+            </tr>
+            {% endfor %}
+
+            {% else %}
+
+            <tr>
+                <th width='5%'>S. No.</th>
+                <th width='13%'>Name</th>
+                <th width='6%'>Subject</th>
+                <th width='18%'>Email</th>
+                <th width='7%'>Phone No.</th>
+            </tr>
+
+            {% for user in users %}
+            <tr>
+                <td>{{forloop.counter}}.</td>
+                <td class="name">{{user.name}}</td>
+                <td>{{user.subject}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone_no}}</td>
+            </tr>
+            {% endfor %}
+
+            {% endif %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('{{page}}')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+
+    const search = document.querySelector('#search-input')
+    search.addEventListener('keyup', () => {
+        const names = document.getElementsByClassName('name')
+
+        for(const ele in names){
+            text = names[ele].innerHTML.toLowerCase()
+            
+            if (text.startsWith(search.value.toLowerCase())){
+                names[ele].parentElement.style.display = ''
+            }
+            else{
+                names[ele].parentElement.style.display = 'none'
+            }
+        }
+    })
+</script>
+{% endblock %}

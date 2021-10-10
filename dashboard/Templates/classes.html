@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Classes {% endblock %}
+
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/classes.css' %}">
+{% endblock %}
+
+
+<!--Main Content-->
+{% block main %}
+
+<center>
+    <div class="container">
+        <h1>
+            <i class="fa fa-video-camera" aria-hidden="true"></i> Online Classes
+            {% if type == 'teacher' %}
+            <a href="/dashboard/add/class"><button class="add">Class <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+            {% endif %}
+        </h1>
+    
+        <div class="class">
+            {% if meets|length == 0 %}
+                <h1 style="margin: auto; opacity: 0.3; margin-top: 7%; user-select: none;">No Classes Scheduled</h1>
+            {% endif %}
+
+            {% for meet in meets %}
+            <div class="class-box">
+                <h3 class="sub">{{meet.subject}}</h3>
+                <span>{{meet.topic}}</span>
+                <br>
+                {% if type == 'student' %}
+                    <span>{{meet.teacher.name}}</span>
+                {% else %}
+                    <span>{{meet.grade}}-{{meet.section}}</span>
+                {% endif %}
+                <br>
+                <span>{{meet.start}} - {{meet.end}}</span>
+                <br>
+                <span>{{meet.date}}</span>
+                <br><br>
+
+                {% if meet.date == time.date and meet.start <= time.time and meet.end >= time.time %}
+                    <a href="{{meet.url}}" target="_blank"> <button>Join <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button> </a>
+
+                {% elif meet.date < time.date %}
+                    <a href=""> <button disabled='true' style="opacity: 0.7;">Class Ended</button> </a>
+
+                {% elif meet.date <= time.date and meet.end < time.time %}
+                    <a href=""> <button disabled='true' style="opacity: 0.7;">Class Ended</button> </a>
+
+                {% else %}
+                    <a href=""> <button disabled='true' style="opacity: 0.7;">Not yet started</button> </a>
+
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </center>
+
+{% endblock %}
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('classes')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+</script>
+{% endblock %}

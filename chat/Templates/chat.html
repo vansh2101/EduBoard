@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!--Title of the page-->
+{% block title %} Chat {% endblock %}
+
+<!--Linking css files-->
+{% block links %}
+<link rel="stylesheet" href="{% static 'styles/chat.css' %}">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+
+
+<!--Main Content-->
+{% block main %}
+<input type="text" style='display:none' disabled value='{{user}}' id='username'>
+
+<div class="split">
+    <div class="left">
+        {% if type == 'teacher' %}
+        <h1>
+            Message
+            <a href="/dashboard/add/chat group/"><button class="add"><i class="fa fa-users" aria-hidden="true"></i> <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+        </h1>
+        {% else %}
+        <h1 style="text-align: center; margin-left: 0;">Message</h1>
+        {% endif %}
+
+        <center><input type="search" placeholder="Type here to search..." id="search-input"></center>
+
+        <ul>
+            {% for room in rooms %}
+            <li onclick="show(this.id)" id="{{room.id}}">
+                <table>
+                    <tr>
+                        <td class="icon-col">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </td>
+                        <td class="main-col">
+                            <h3 id="{{room.id}}-name" class="name">{{room.name}}</h3>
+                            <span><b>Teacher:</b></span> <span id="teacher">{{room.teacher.name}}</span>
+                        </td>
+                        <td class="icon-col">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="right">
+        <div id='msg-area' style="display: none;">
+            <div class="top">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <h1 id="name"></h1>
+            </div>
+
+            <div class="msgs">
+                <ul id="chat-text">
+                </ul>
+            </div>
+
+            <div class="send">
+                <input type="text" placeholder="Type your message..." name="msg" id="input"><button type="submit" id="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                <button type="submit" id="disconnect" style="display: none;"></button>
+            </div>
+        </div>
+
+        <center>
+            <h1 id="before-text" style="margin-top: 40%; color: gray; opacity: 0.5; user-select: none;">Click on a chat to open</h1>
+        </center>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+<!--Script Tags-->
+{% block script %}
+<script>
+    tab = document.getElementById('chat')
+    tab.style.backgroundImage = 'linear-gradient(to bottom right, #4b189b, #185ed0)'
+    tab.style.color = 'white'
+    
+    const search = document.querySelector('#search-input')
+    search.addEventListener('keyup', () => {
+        const names = document.getElementsByClassName('name')
+
+        for(const ele in names){
+            text = names[ele].innerHTML.toLowerCase()
+            if (text.startsWith(search.value.toLowerCase())){
+                names[ele].parentElement.parentElement.parentElement.style.display = 'block'
+            }
+            else{
+                names[ele].parentElement.parentElement.parentElement.style.display = 'none'
+            }
+        }
+    })
+
+    rname = document.getElementById('name')
+    msg_area = document.getElementById('msg-area')
+    waste = document.getElementById('before-text')
+    
+    var socket = true
+
+    function show(id){
+        waste.style.display = 'none'
+        msg_area.style.display = 'block'
+        const roomName = document.getElementById(id+'-name').innerHTML
+
+        rname.innerHTML = roomName;
+
+        if(socket === false){
+            document.getElementById('disconnect').click()
+        }
+
+        var username = document.getElementById('username').value
+        var chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + roomName + '/');
+        socket = false
+
+        document.querySelector('#submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#input')
+            const message = messageInputDom.value
+
+            if (message.trim() !== ''){
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                    'username': username,
+                }))
+                messageInputDom.value = ''
+            }
+        }
+
+        document.querySelector('#disconnect').onclick = function(e) {
+            chatSocket.send(JSON.stringify({
+                    'action': 'disconnect'
+            }))
+
+            if (roomName !== rname.innerHTML && rname.innerHTML !== ''){
+                $("li").remove(".message");
+            }
+        }
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data)
+
+            if (data.username === username){
+                ele = '<li style="justify-content: right;" class="message"><div style="background-color: #d8ecf3;"><h3>' + data.username + '</h3><p>' + data.message + '</p></div></li>'
+            }
+            else{
+                ele = '<li class="message"><div><h3>' + data.username + '</h3><p>' + data.message + '</p></div></li>'
+            }
+
+            document.querySelector('#chat-text').innerHTML += ele
+
+            if (data.username === username){
+                document.querySelector('#chat-text').scrollIntoView(false)
+            }
+        }
+    }
+
+</script>
+{% endblock %}

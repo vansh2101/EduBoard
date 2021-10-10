@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'styles/global.css' %}">
+    {% block links %}
+    {% endblock %}
+
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <button class="open" id="open" onclick="openbar()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+
+    <button class="close" id="close" onclick="closebar()"><i class="fa fa-times" aria-hidden="true"></i></button>
+
+    <div class="sidebar" id="sidebar">
+
+        <h3><img src="{% static 'images/logo.png' %}"> EduBoard</h3>
+
+        <ul id="options">
+            <a href="/dashboard/"><li id="home"><i class="fa fa-home" aria-hidden="true"></i> Home</li></a>
+            <a href="/dashboard/classes/"><li id="classes"><i class="fa fa-video-camera" aria-hidden="true"></i> Classes</li></a>
+
+            {% if type != 'school' %}
+
+            <a href="/dashboard/assignments/"><li id="assignments"><i class="fa fa-file-text" aria-hidden="true"></i> Assignments</li></a>
+            <a href="/dashboard/ebooks/"><li id="books"><i class="fa fa-book" aria-hidden="true"></i> EBooks</li></a>
+
+            {% else %}
+
+            <a href="/dashboard/students/"><li id="students"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Students</li></a>
+            <a href="/dashboard/teachers/"><li id="teachers"><i class="fa fa-users" aria-hidden="true"></i> Teachers</li></a>
+
+            {% endif %}
+
+            <a href="/dashboard/circulars/"><li id="circular"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Circulars</li></a>
+            <a href="/chat/"><li id="chat"><i class="fa fa-commenting" aria-hidden="true"></i> Chat</li></a>
+
+
+            <a href="/auth/logout/"><li id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</li></a>
+        </ul>
+    </div>
+
+    <main>        
+        {% block main %}
+        {% endblock %}
+    </main>
+</body>
+{% block script %}
+{% endblock %}
+<script>
+    localStorage.setItem('circular', '')
+    localStorage.setItem('assignment', '')
+
+
+    function openbar(){
+        document.getElementById('close').style.display = 'block'
+        document.getElementById('open').style.display = 'none'
+        document.getElementById('sidebar').style.width = '250px'
+        document.getElementById('options').style.visibility = 'visible'
+    }
+
+    function closebar(){
+        document.getElementById('close').style.display = 'none'
+        document.getElementById('open').style.display = 'block'
+        document.getElementById('options').style.visibility = 'hidden'
+        document.getElementById('sidebar').style.width = '0'
+        
+    }
+</script>
+</html>

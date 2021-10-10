@@ -1,0 +1,83 @@
+/* Common Classes */
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+.book-container{
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    width: 91%;
+    height: 88vh;
+    padding: 1.5vh 2vw;
+    margin-top: 2%;
+    overflow-y: auto;
+}
+
+.book-container h1{
+    font-size: 3vw;
+    position: relative;
+}
+
+.add{
+    position: absolute;
+    top: 15%;
+    right: 2%;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+    padding: 7px 10px;
+    width: 15%;
+    color: white;
+    font-size: 1.4vw;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.add:hover{
+    transform: translateY(-5px);
+    box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,0.2);
+}
+
+.container{
+    display: flex;
+    flex-flow: wrap;
+    width: 100%;
+    margin: auto;
+    margin-top: -1%;
+}
+
+.book{
+    background-color: #f2f2f2;
+    width: 20%;
+    border-radius: 10px;
+    padding: 10px 5px;
+    height: 277px;
+    text-align: center;
+    margin: 1.2% 1.5%;
+}
+.book i{
+    font-size: 10vw;
+}
+.book h3{
+    height: 10px;
+    margin-top: 0;
+    font-size: 1.5vw;
+}
+
+.book span{
+    font-size: 1.3vw;
+    color: #666a6d;
+}
+
+.book button{
+    width: 90%;
+    border-radius: 10px;
+    padding: 5px 0;
+    margin-bottom: 3%;
+    margin-top: 7%;
+    font-size: 1.3vw;
+    color: white;
+    background-image: linear-gradient(to bottom right, #4b189b, #185ed0);
+}

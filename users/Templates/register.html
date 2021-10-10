@@ -1,0 +1,93 @@
+{% extends "login.html" %}
+
+{% load static %}
+
+<!--Title Tag-->
+{% block title %} Register {% endblock %}
+
+
+<!--Left Split-->
+{% block left-split %}
+<img src="{% static 'images/register.svg' %}">
+{% endblock %}
+
+
+<!--Right Split-->
+{% block right-split %}
+
+<h1>Register</h1>
+<br>
+
+<center>
+    <form class="register-form" action="/auth/register/" method="POST">
+        {% csrf_token %}
+        <div class="col">
+            <div>
+                <label>{{form.school_name.label}}:</label>
+                <br>
+                {{form.school_name}}
+            </div>
+
+            <div>
+                <label>{{form.school_email.label}}:</label>
+                <br>
+                {{form.school_email}}
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <label>{{form.school_phone_number.label}}:</label>
+                <br>
+                {{form.school_phone_number}}
+            </div>
+
+            <div>
+                <label>{{form.school_address.label}}:</label>
+                <br>
+                {{form.school_address}}
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <label>{{form.city.label}}:</label>
+                <br>
+                {{form.city}}
+            </div>
+
+            <div>
+                <label>{{form.country.label}}:</label>
+                <br>
+                {{form.country}}
+            </div>
+        </div>
+
+        <div class="col">
+            <div>
+                <label>{{form.password.label}}:</label>
+                <br>
+                {{form.password}}
+            </div>
+
+            <div>
+                <label>{{form.confirm_password.label}}:</label>
+                <br>
+                {{form.confirm_password}}
+            </div>
+        </div>
+
+        <center>
+            {% for msg in messages %}
+            <div class="error">
+                *{{msg}}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Sign Up">
+        </center>
+    </form>
+
+    <span>Already Registered Your School? <a href="/auth/login">Sign In</a></span>
+</center>
+
+{% endblock %}
